@@ -130,3 +130,70 @@ footer {
 #buttonEditTask {
   display: none;
 }
+
+.menu-mobile {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  display: none;
+}
+
+.menu-bar {
+  background-color: #000;
+  width: 100%;
+  height: 3px;
+}
+
+.taskItem {
+  max-width: 380px;
+}
+
+.taskItem {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+@media (max-width: 740px) {
+  .list-header-container {
+    flex-direction: column;
+    top: 89px;
+    right: 0;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: 0;
+    gap: 0;
+    display: none;
+  }
+
+  .list-header-container li {
+    padding: 10px;
+  }
+
+  .menu-mobile {
+    display: flex;
+  }
+
+  .active {
+    display: block;
+  }
+
+  .tasks {
+    width: 450px;
+  }
+  .input-add-task {
+    width: 300px;
+  }
+}
+
+@media (max-width: 470px) {
+  .tasks {
+    width: 400px;
+  }
+  .input-add-task {
+    width: 250px;
+  }
+}

@@ -4,6 +4,7 @@ let buttonAddTask = document.querySelector(".button");
 let buttonEditTask = document.querySelector("#buttonEditTask");
 let searchBar = document.querySelector(".search-bar");
 let taskAtual = null;
+let menuMobile = document.querySelector(".menu-mobile");
 buttonEditTask.style.display = "none";
 
 let saved = localStorage.getItem("tasks").split(",");
@@ -68,4 +69,10 @@ function render() {
   });
 
   localStorage.setItem("tasks", taskList);
+}
+
+function handleMenuMobile() {
+  let listMenu = document.querySelector(".list-header-container");
+
+  listMenu.classList.toggle("active");
 }
