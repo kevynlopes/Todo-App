@@ -1,12 +1,20 @@
 let taskList = [];
 let input = document.querySelector(".input-add-task");
+let buttonAddTask = document.querySelector(".button");
+let buttonEditTask = document.querySelector("#buttonEditTask");
+let searchBar = document.querySelector(".search-bar");
+let taskAtual = null;
 buttonEditTask.style.display = "none";
-function adicionarTarefa(task) {
-  if (input.value == "") return;
 
-  taskList.push(input.value);
+let saved = localStorage.getItem("tasks").split(",");
+taskList = saved ? saved : [];
+render();
+
+function adicionarTarefa() {
+  if (!input.value.trim()) return;
+
+  taskList.push(input.value.trim());
   input.value = "";
-
   render();
 }
 
@@ -15,26 +23,29 @@ function removeTask(index) {
     confirm("Tem certeza que deseja apagar essa tarefa de sua lista?") == true
   ) {
     taskList.splice(index, 1);
+    input.value = "";
+    buttonEditTask.style.display = "none";
+    buttonAddTask.style.display = "block";
     render();
   }
 }
 
 function editTask(task) {
+  taskAtual = task;
+  buttonEditTask.style.display = "block";
+  buttonAddTask.style.display = "none";
+
   input.value = "";
   input.value = taskList[task];
-  let buttonAddTask = document.querySelector(".button");
-  let buttonEditTask = document.querySelector("#buttonEditTask");
-  buttonAddTask.style.display = "none";
-  buttonEditTask.style.display = "block";
-  buttonEditTask.addEventListener("click", () => {
-    if (input.value == "") return;
-    console.log(taskList, "taskindex", task);
-    taskList[task] = input.value;
-    buttonAddTask.style.display = "block";
-    buttonEditTask.style.display = "none";
-    input.value = "";
-    render();
-  });
+}
+
+function editarTarefa() {
+  taskList[taskAtual] = input.value;
+  buttonEditTask.style.display = "none";
+  buttonAddTask.style.display = "block";
+  input.value = "";
+  taskAtual = null;
+  render();
 }
 
 function render() {
@@ -46,7 +57,7 @@ function render() {
     taskEl.classList.add("task-item");
 
     taskEl.innerHTML = `
-      ${taskItem}
+    <div class="taskItem">${taskItem}</div>
      <div>
       <button onclick="removeTask(${index})" class="button remove">Remove</button>
       <button onclick="editTask(${index})" class="button edit">Editar</button>
@@ -55,4 +66,6 @@ function render() {
 
     tasks.appendChild(taskEl);
   });
+
+  localStorage.setItem("tasks", taskList);
 }
