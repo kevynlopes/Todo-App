@@ -1,4 +1,6 @@
-let tasksArchived = [];
+let tasksArchived = localStorage.getItem("tasksArchived")
+  ? localStorage.getItem("tasksArchived").split(",")
+  : [];
 let taskList = [];
 let input = document.querySelector(".input-add-task");
 let buttonAddTask = document.querySelector(".button");
@@ -13,6 +15,7 @@ let saved = localStorage.getItem("tasks")
   : [];
 taskList = saved ? saved : [];
 render();
+tasksArchived = tasksArchived ? tasksArchived : [];
 
 function adicionarTarefa() {
   if (!input.value.trim()) return;
@@ -45,11 +48,15 @@ function editTask(task) {
 
 function archiveTask(taskIndex) {
   if (taskIndex !== null) {
+    console.log(taskIndex);
     let taskArchive = taskList[taskIndex];
 
+    console.log(tasksArchived);
     tasksArchived.push(taskArchive);
 
     localStorage.setItem("tasksArchived", tasksArchived);
+
+    console.log(localStorage.getItem("tasksArchived"));
 
     taskList.splice(taskIndex, 1);
     render();
