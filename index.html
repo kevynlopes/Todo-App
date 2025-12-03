@@ -5,36 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo - App</title>
     <link rel="stylesheet" href="assets/styles/styles.css" />
+    <link rel="stylesheet" href="/src/components/header/header.css" />
+    <link rel="stylesheet" href="/src/components/footer/footer.css" />
+    <script src="src/components/header/header.js"></script>
+    <script src="/src/components/footer/footer.js"></script>
   </head>
   <body>
-    <header>
-      <nav class="container">
-        <div>Todo - App</div>
-        <ul class="list-header-container">
-          <li>
-            <a href="/">Notas</a>
-          </li>
-          <li>
-            <a href="/">Lembretes</a>
-          </li>
-          <li>
-            <a href="/">Editar Marcadores</a>
-          </li>
-          <li>
-            <a href="/">Lixeira</a>
-          </li>
-          <li>
-            <a href="/">Arquivados</a>
-          </li>
-        </ul>
-
-        <div class="menu-mobile" onclick="handleMenuMobile()">
-          <div class="menu-bar"></div>
-          <div class="menu-bar"></div>
-          <div class="menu-bar"></div>
-        </div>
-      </nav>
-    </header>
+    <main-header></main-header>
 
     <section class="search-bar">
       <input
@@ -64,7 +41,8 @@
       </div>
     </section>
 
-    <footer>Criador por Kevyn Lopes - Todos direitos reservados. ©</footer>
+    <main-footer></main-footer>
+
     <script src="assets/js/script.js"></script>
   </body>
 </html>

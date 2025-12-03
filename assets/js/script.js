@@ -1,3 +1,4 @@
+let tasksArchived = [];
 let taskList = [];
 let input = document.querySelector(".input-add-task");
 let buttonAddTask = document.querySelector(".button");
@@ -7,7 +8,9 @@ let taskAtual = null;
 let menuMobile = document.querySelector(".menu-mobile");
 buttonEditTask.style.display = "none";
 
-let saved = localStorage.getItem("tasks").split(",");
+let saved = localStorage.getItem("tasks")
+  ? localStorage.getItem("tasks").split(",")
+  : [];
 taskList = saved ? saved : [];
 render();
 
@@ -40,6 +43,19 @@ function editTask(task) {
   input.value = taskList[task];
 }
 
+function archiveTask(taskIndex) {
+  if (taskIndex !== null) {
+    let taskArchive = taskList[taskIndex];
+
+    tasksArchived.push(taskArchive);
+
+    localStorage.setItem("tasksArchived", tasksArchived);
+
+    taskList.splice(taskIndex, 1);
+    render();
+  }
+}
+
 function editarTarefa() {
   taskList[taskAtual] = input.value;
   buttonEditTask.style.display = "none";
@@ -60,8 +76,9 @@ function render() {
     taskEl.innerHTML = `
     <div class="taskItem">${taskItem}</div>
      <div>
-      <button onclick="removeTask(${index})" class="button remove">Remove</button>
+      <button onclick="removeTask(${index})" class="button remove">Remover</button>
       <button onclick="editTask(${index})" class="button edit">Editar</button>
+      <button onclick="archiveTask(${index})" class="button archive">Arquivar</button>
      </div>
     `;
 
